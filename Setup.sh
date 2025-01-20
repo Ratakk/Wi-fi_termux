@@ -14,111 +14,99 @@ RESET='\033[0m'
 
 # Presentación
 clear
-echo -e "${CYAN}==============================="
+echo -e "${CYAN}=============================================================="
 echo -e "        Script by ${WHITE}$alias${CYAN}"
-echo -e "===============================${RESET}"
+echo -e "==============================================================${RESET}"
 echo
-echo -e "${WHITE}¡Bienvenido a wi-fi_termux!${RESET}"
-echo -e "${CYAN}Por favor, ingresa el nombre de la red Wi-Fi: ${RESET}"
+echo -e "${WHITE}Welcome to Wi-Fi_Termux!${RESET}"
+echo -e "${CYAN}Please enter the Wi-Fi network name: ${RESET}"
 read -p ">> " network_name
 echo
-echo -e "${BLUE}Iniciando proceso para la red '${WHITE}$network_name${BLUE}'...${RESET}"
-sleep 2
+echo -e "${BLUE}Starting the process for the network '${WHITE}$network_name${BLUE}'...${RESET}"
+sleep 1
 
-# Textos incomprensibles con colores
+# Función para la barra de progreso
+progress_bar() {
+  local duration=$1
+  local bar_length=40
+  local progress=0
+
+  while [ $progress -le $bar_length ]; do
+    bar=$(printf "%-${bar_length}s" "#" | cut -c1-$progress)
+    spaces=$(printf "%-${bar_length}s" "" | cut -c1-$(($bar_length - $progress)))
+    printf "\r[${GREEN}${bar}${RESET}${spaces}] $((($progress * 100) / $bar_length))%%"
+    sleep $(echo "$duration / $bar_length" | bc -l)
+    ((progress++))
+  done
+  echo
+}
+
+# Simulación del proceso
 echo -e "${YELLOW}[INFO]${WHITE} Loading dependencies...${RESET}"
-sleep 1
-echo -e "${BLUE}Reading configuration files...${WHITE} /etc/network/$network_name.conf${RESET}"
-sleep 1
-echo -e "${RED}[WARNING]${WHITE} Unresolved symbol 'NWK_CFG'${RESET}"
-sleep 1
-echo -e "${GREEN}Parsing packet headers (1204 bytes) ${CYAN}[#########          ] 63%${RESET}"
-sleep 2
-echo -e "${BLUE}Initializing handshake protocols... ${GREEN}[OK]${RESET}"
-sleep 1
-echo -e "${BLUE}Resolving network latency issues... ${GREEN}[OK]${RESET}"
-sleep 1
-echo -e "${YELLOW}[INFO]${WHITE} Generating payload metadata${RESET}"
-sleep 2
-echo -e "${CYAN}[DEBUG]${WHITE} Memory stack overflow detected (ignoring)${RESET}"
-sleep 1
-echo -e "${RED}[WARNING]${WHITE} Retrying handshake: Attempt 3${RESET}"
-sleep 2
-echo -e "${BLUE}Authenticating to router... ${GREEN}[SUCCESS]${RESET}"
-sleep 2
-echo -e "${YELLOW}[INFO]${WHITE} Data encryption bypassed using AES-256-RSA${RESET}"
-sleep 1
-echo -e "${YELLOW}[INFO]${WHITE} Injecting payload (3/3)... ${GREEN}[DONE]${RESET}"
-sleep 2
-echo -e "${BLUE}Performing final handshake sequence...${RESET}"
-sleep 3
-echo -e "${CYAN}[DEBUG]${WHITE} Launching auxiliary threads: PID 3451${RESET}"
-sleep 1
-echo -e "${BLUE}Scanning active ports...${RESET}"
-sleep 1
-echo -e "${YELLOW}[INFO]${WHITE} Port 80: HTTP detected${RESET}"
-sleep 1
-echo -e "${YELLOW}[INFO]${WHITE} Port 443: HTTPS detected${RESET}"
-sleep 1
-echo -e "${YELLOW}[INFO]${WHITE} Port 22: SSH detected${RESET}"
-sleep 1
-echo -e "${RED}[WARNING]${WHITE} Port 21: FTP detected (insecure)${RESET}"
-sleep 1
-echo -e "${BLUE}Establishing reverse TCP shell...${RESET}"
-sleep 2
-echo -e "${BLUE}Attempting payload delivery (stage 1)... ${CYAN}[IN PROGRESS]${RESET}"
-sleep 3
-echo -e "${BLUE}Attempting payload delivery (stage 2)... ${GREEN}[DONE]${RESET}"
-sleep 2
-echo -e "${YELLOW}[INFO]${WHITE} Initializing remote memory dump...${RESET}"
-sleep 2
-echo -e "${CYAN}[DEBUG]${WHITE} Collecting system logs...${RESET}"
-sleep 1
-echo -e "${RED}[WARNING]${WHITE} Kernel version mismatch: 5.11.0-27${RESET}"
-sleep 2
-echo -e "${YELLOW}[INFO]${WHITE} Reading environment variables...${RESET}"
-sleep 1
-echo -e "${CYAN}[DEBUG]${WHITE} Variable PATH=/usr/bin:/usr/local/bin:/bin${RESET}"
-sleep 1
-echo -e "${CYAN}[DEBUG]${WHITE} Variable USER=root${RESET}"
-sleep 1
-echo -e "${YELLOW}[INFO]${WHITE} Analyzing traffic patterns...${RESET}"
-sleep 2
-echo -e "${RED}[WARNING]${WHITE} Detected abnormal traffic on port 53 (DNS)${RESET}"
-sleep 2
-echo -e "${YELLOW}[INFO]${WHITE} Packet size exceeds MTU: Fragmentation required${RESET}"
-sleep 1
-echo -e "${CYAN}[DEBUG]${WHITE} Compressing data payload... ${GREEN}[OK]${RESET}"
-sleep 2
-echo -e "${YELLOW}[INFO]${WHITE} Decrypting WPA2 handshake...${RESET}"
-sleep 3
-echo -e "${YELLOW}[INFO]${WHITE} Key exchange completed successfully!${RESET}"
-sleep 2
-echo -e "${CYAN}[DEBUG]${WHITE} Analyzing ARP table...${RESET}"
-sleep 1
-echo -e "${BLUE}192.168.1.1 -> 00:11:22:33:44:55 (router)${RESET}"
-sleep 1
-echo -e "${BLUE}192.168.1.100 -> 66:77:88:99:AA:BB (device)${RESET}"
-sleep 1
-echo -e "${YELLOW}[INFO]${WHITE} Spoofing MAC address: 22:33:44:55:66:77${RESET}"
-sleep 2
-echo -e "${RED}[WARNING]${WHITE} Potential intrusion detected (ignoring)${RESET}"
-sleep 2
-echo -e "${YELLOW}[INFO]${WHITE} Finalizing payload execution...${RESET}"
-sleep 2
-echo -e "${CYAN}[DEBUG]${WHITE} Memory dump saved to /tmp/dump.bin${RESET}"
-sleep 1
-echo -e "${YELLOW}[INFO]${WHITE} Operation completed. Extracting data...${RESET}"
-sleep 3
-echo -e "${YELLOW}[INFO]${WHITE} Key extracted successfully!${RESET}"
+progress_bar 2
 
-# Mostrar contraseña al final
+echo -e "${CYAN}[DEBUG]${WHITE} Fetching update information...${RESET}"
+for i in {1..10}; do
+  echo "Reading package lists... Done" | tee >(sleep 0.05)
+  echo "Building dependency tree... Done" | tee >(sleep 0.05)
+  echo "Reading state information... Done" | tee >(sleep 0.05)
+done
+
+echo -e "${BLUE}Upgrading system packages...${RESET}"
+for i in {1..15}; do
+  echo "Preparing to unpack .../$i.0-ubuntu.deb" | tee >(sleep 0.04)
+  echo "Unpacking $i.0-ubuntu.deb (version 1.$i.0) ..." | tee >(sleep 0.04)
+done
+echo "Processing triggers for libc-bin (2.31-0ubuntu9)..." | tee >(sleep 0.04)
+
+echo -e "${YELLOW}[INFO]${WHITE} Downloading network dependencies...${RESET}"
+progress_bar 3
+for i in {1..8}; do
+  echo "Fetching package: netlib$i.0.3 (from https://mirror.pkg.org)" | tee >(sleep 0.05)
+  echo "Checksum verified for netlib$i.0.3.tar.gz" | tee >(sleep 0.05)
+done
+
+echo -e "${CYAN}[DEBUG]${WHITE} Initializing handshake protocols${RESET}"
+progress_bar 4
+
+echo -e "${YELLOW}[INFO]${WHITE} Simulating traffic analysis...${RESET}"
+for i in {1..20}; do
+  echo "Analyzing packet: TCP seq=$i, ack=$((i + 1)), len=1200" | tee >(sleep 0.03)
+done
+
+echo -e "${RED}[WARNING]${WHITE} Packet loss detected on seq=15 (retrying)" | tee >(sleep 0.1)
+
+echo -e "${BLUE}Performing final handshake sequence...${RESET}"
+progress_bar 2
+
+echo -e "${YELLOW}[INFO]${WHITE} Downloading WPA2 handshake packets...${RESET}"
+for i in {1..12}; do
+  echo "Capturing EAPOL frame $i of 4" | tee >(sleep 0.05)
+done
+
+echo -e "${CYAN}[DEBUG]${WHITE} Injecting payload into memory...${RESET}"
+progress_bar 3
+
+echo -e "${BLUE}Scanning network ports...${RESET}"
+for i in {20..25}; do
+  echo "Port $i: Closed" | tee >(sleep 0.03)
+done
+echo "Port 80: Open" | tee >(sleep 0.03)
+echo "Port 443: Open" | tee >(sleep 0.03)
+
+echo -e "${YELLOW}[INFO]${WHITE} Decrypting WPA2 handshake...${RESET}"
+progress_bar 4
+
+echo -e "${GREEN}[SUCCESS]${WHITE} Key exchange completed successfully!${RESET}"
+sleep 1
+echo -e "${CYAN}[DEBUG]${WHITE} Saving memory dump to /tmp/dump.bin${RESET}"
+
 PASSWORD="firsaul2023" # Cambiar aquí la contraseña
 echo
 echo -e "${CYAN}==============================="
-echo -e "     Red: ${WHITE}$network_name${CYAN}"
-echo -e " Contraseña: ${GREEN}$PASSWORD${CYAN}"
+echo -e "     Network: ${WHITE}$network_name${CYAN}"
+echo -e "  Password: ${GREEN}$PASSWORD${CYAN}"
 echo -e "===============================${RESET}"
 echo
-echo -e "${GREEN}Proceso completado. ¡Gracias por usar este repositorio!${RESET}"
+echo -e "${GREEN}Process completed. Thanks for using this repository!${RESET}"
 exit
