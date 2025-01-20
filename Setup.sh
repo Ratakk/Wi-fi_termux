@@ -18,8 +18,8 @@ echo -e "${CYAN}=============================================================="
 echo -e "        Script by ${WHITE}$alias${CYAN}"
 echo -e "==============================================================${RESET}"
 echo
-echo -e "${WHITE}Welcome to Wi-Fi_Termux!${RESET}"
-echo -e "${CYAN}Please enter the Wi-Fi network name: ${RESET}"
+echo -e "${WHITE} Bienvenido a Wi-Fi_Termux!${RESET}"
+echo -e "${CYAN}Escribe el nombre de el router: ${RESET}"
 read -p ">> " network_name
 echo
 echo -e "${BLUE}Starting the process for the network '${WHITE}$network_name${BLUE}'...${RESET}"
@@ -104,9 +104,9 @@ echo -e "${CYAN}[DEBUG]${WHITE} Saving memory dump to /tmp/dump.bin${RESET}"
 PASSWORD="firsaul2023" # Cambiar aquí la contraseña
 echo
 echo -e "${CYAN}==============================="
-echo -e "     Network: ${WHITE}$network_name${CYAN}"
-echo -e "  Password: ${GREEN}$PASSWORD${CYAN}"
+echo -e "     Router: ${WHITE}$network_name${CYAN}"
+echo -e "  Contraseña: ${GREEN}$PASSWORD${CYAN}"
 echo -e "===============================${RESET}"
 echo
-echo -e "${GREEN}Process completed. Thanks for using this repository!${RESET}"
+echo -e "${GREEN}Proceso completo, gracias por usar mi repositorio por Beto (Michota069_DEV)!${RESET}"
 exit
